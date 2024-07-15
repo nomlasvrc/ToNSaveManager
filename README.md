@@ -1,16 +1,15 @@
-﻿<div align="center">
+<div align="center">
   <img src="Resources/icon256.ico" alt="App Icon" width="124" style="display:inline; vertical-align:middle;">
 
-  # Terrors of Nowhere: Save Manager
-  Simple tool that will keep track of your **Save Codes** so you can play and recover your codes later if you forgot to make a backup.
-  And saves your code history locally for later use.
+  # Terrors of Nowhere: セーブマネージャー
+  セーブコードを記録しておくシンプルなツールで、バックアップをし忘れてもコードを復元してプレイできます。また、コード履歴をローカル保存して後で使用できます。
+  [ChrisFeline/ToNSaveManager](https://github.com/ChrisFeline/ToNSaveManager)の非公式日本語翻訳フォークです。
 
-  # [Download](https://github.com/ChrisFeline/ToNSaveManager/releases/latest/download/ToNSaveManager.zip "Use this link to download the latest version directly from GitHub.")
+  # [ダウンロード](https://github.com/nomlasvrc/ToNSaveManager/releases/latest/download/ToNSaveManager.zip "GitHubから直接最新バージョンをダウンロードする")
 
-  [View Releases](https://github.com/ChrisFeline/ToNSaveManager/releases "Show a list of current and previous releases.") • 
-  [Saving Guide](https://terror.moe/save "HOW TO SAVE & LOAD FOR DUMMIES") • 
-  [How To Use](#-faq) • 
-  [Español](README.es.md)
+  [リリース](https://github.com/nomlasvrc/ToNSaveManager/releases "現在と過去のリリース") • 
+  [初心者向けセーブガイド](https://terror.moe/save "初心者向けのセーブ方法") • 
+  [使い方](#-faq)
 </div>
 
 <p align="center">
@@ -49,7 +48,7 @@
 # 📋 FAQ:
 
 > ## How do I use this?
-> 1. Download on the [<u>Latest Release</u>](https://github.com/ChrisFeline/ToNSaveManager/releases/latest), the compressed file called `ToNSaveManager.zip`.
+> 1. Download on the [<u>Latest Release</u>](https://github.com/nomlas/ToNSaveManager/releases/latest), the compressed file called `ToNSaveManager.zip`.
 > 2. Extract the contents of the **.zip** file into a folder of your choice.
 > 3. Open `ToNSaveManager.exe`.
 > 4. Select the log date on the left, then click one of the saves in the right.
@@ -77,7 +76,7 @@
 >
 > This is so people that download this program does not have to go download the .NET runtime framework themselves. And it's ready to run without any extra actions from the user.
 >
-> The program is compiled from the source using Github actions, you can see the full arguments in [the workflow file](https://github.com/ChrisFeline/ToNSaveManager/blob/a0d503b02fe25fde1b36ca9807756f1830c8e7a8/.github/workflows/dotnet-desktop.yml#L46C45-L46C45).
+> The program is compiled from the source using Github actions, you can see the full arguments in [the workflow file](https://github.com/nomlas/ToNSaveManager/blob/a0d503b02fe25fde1b36ca9807756f1830c8e7a8/.github/workflows/dotnet-desktop.yml#L46C45-L46C45).
 
 
 > ## Is this against VRChats ToS?
