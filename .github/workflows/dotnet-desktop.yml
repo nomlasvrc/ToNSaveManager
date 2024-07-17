@@ -1,0 +1,126 @@
+name: .NET Core Desktop
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+    paths-ignore:
+      - '**.md'  # Ignore markdown files
+      - '**.png' # Ignore image files
+      - '**.bat' # Ignore batch files
+      - '**.gif' # Ignore gif files
+      - '**.yml' # Ignore yaml files
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: ToNSaveManager.sln
+      Project_Name: ToNSaveManager.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    # Add MSBuild to the PATH
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    - name: Get the date
+      id: get_date
+      run: |
+        $timestamp = Get-Date -Format "yyyy.M.d"
+        $time = [int]((Get-Date) - (Get-Date).Date).TotalMinutes
+        echo "date=$timestamp.$time" >> "$env:GITHUB_OUTPUT"
+      shell: pwsh
+
+    - name: Update project version
+      run: |
+        $date = "${{ steps.get_date.outputs.date }}"
+        $csprojPath = "${{ env.Project_Name }}"
+        $csproj = Get-Content $csprojPath -Raw
+        $csproj = $csproj -replace '<Version>.*?</Version>', "<Version>$date</Version>"
+        $csproj = $csproj -replace '<FileVersion>.*?</FileVersion>', "<FileVersion>$date</FileVersion>"
+        Set-Content -Path $csprojPath -Value $csproj
+      shell: pwsh
+
+    - name: Update Terrors index data
+      run: |
+          $data = "${{ secrets.TERROR_INDEX_DATA }}"
+          [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($data)) | Out-File -Encoding "UTF8" "./Resources/index.json"
+      shell: pwsh
+
+    # Build the application
+    - name: Build the application
+      run: dotnet publish $env:Solution_Name -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true --property:PublishDir=./publish
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    - name: Zip Artifact
+      run: |
+        Compress-Archive -Path ./publish/* -DestinationPath ToNSaveManager.zip -Update
+
+    # Upload the build artifacts just in case
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ToNSaveManager
+        path: ToNSaveManager.zip
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/heads/main')
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_date.outputs.date }}
+        release_name: Release ${{ steps.get_date.outputs.date }}
+        body: |
+          # [Download](https://github.com/ChrisFeline/ToNSaveManager/releases/latest/download/ToNSaveManager.zip)
+
+          [changelog]: <> (START)
+          ### Changes in this release
+          -
+
+          [changelog]: <> (END)
+
+          **NOTE:** If you are unsure what to do, go check the [README](https://github.com/ChrisFeline/ToNSaveManager/blob/main/README.md#how-do-i-use-this), basically just extract and run.
+
+          ### If you already downloaded and want to update an old release you have these options:
+          * Click on `Settings`, then click `Check For Updates`.
+          * If previous option doesn't work, open the file `update.bat`, the new files will be downloaded.
+        draft: true
+        prerelease: false
+    
+    - name: Upload Release Asset
+      if: startsWith(github.ref, 'refs/heads/main')
+      id: upload_release_asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ToNSaveManager.zip
+        asset_name: ToNSaveManager.zip
+        asset_content_type: application/zip
