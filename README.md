@@ -2,8 +2,8 @@
   <img src="Resources/icon256.ico" alt="App Icon" width="124" style="display:inline; vertical-align:middle;">
 
   # Terrors of Nowhere: セーブマネージャー
-  セーブコードを記録しておくシンプルなツールで、バックアップをし忘れてもコードを復元してプレイできます。また、コード履歴をローカル保存して後で使用できます。
-  [ChrisFeline/ToNSaveManager](https://github.com/ChrisFeline/ToNSaveManager)の非公式日本語翻訳フォークです。
+  セーブコードを記録しておくシンプルなツールで、バックアップをし忘れてもコードを復元してプレイできます。また、コード履歴をローカル保存して後で使用できます。 <br>
+  これは[ChrisFeline/ToNSaveManager](https://github.com/ChrisFeline/ToNSaveManager)の非公式日本語翻訳フォークです。翻訳について[のむらす](https://twitter.com/nomlasvrc)はいかなる保証もできません。
 
   # [ダウンロード](https://github.com/nomlasvrc/ToNSaveManager/releases/latest/download/ToNSaveManager.zip "GitHubから直接最新バージョンをダウンロードする")
 
@@ -16,106 +16,105 @@
   <img src="Resources/preview.png" alt="Preview" title="Boo!">
 </p>
 
-# 🛠️ Features & Clarifications
-- Automatically scans your logs for previous **Save Codes**.
-- While the tool is running, it will detect new codes as you play.
-- Previously detected save codes will be saved to a local database, so if VRChat deletes logs overtime, you'll have a history of Save Codes locally, and safe.
+# 🛠️ 機能と説明
+- ログを自動的にスキャンしてセーブコードを探します。
+- ツールの実行中は、プレイ中に新しいコードが検出されます。
+- 以前に検出されたセーブ コードはローカル データベースに保存されるため、VRChat が時間の経過とともにログを削除した場合でも、セーブ コードの履歴はローカルに安全に残ります。
 
-### Settings Window
-- `Auto Clipboard Copy` Automatically copy new save codes to clipboard.
-- `Collect Player Names` Save codes will show players that were in the instance.
-- `XSOverlay Popup` XSOverlay notifications when new save codes are detected.
-- `Play Sound` Play a notification audio when a new save is detected.
-  - Double Click to select a custom audio file. (Only '.wav' files)
-  - Right Click to reset audio file back to 'default.wav'
-- `Colorful Objectives` Items in the 'Objectives' window will show colors that correspond to those of the items in the game.
-- `Auto Discord Backup` Uses a [discord webhook](##how-to-properly-configure-automatic-discord-backup-using-webhooks) to automatically upload a backup of your new codes to a discord channel as you play.
-- `Check For Updates` When clicked, it will check this github repo for new releases, and prompt you to try an automatic update.
-<details><summary>Preview Image</summary><p> <img src="Resources/settings.png" > </p></details>
+### 設定画面
+- `Auto Clipboard Copy` 新しいセーブコードを自動的にクリップボードにコピーします。
+- `Collect Player Names` セーブコードには、インスタンスにいたプレイヤーが表示されます。
+- `XSOverlay Popup` 新しいセーブコードが検出されると、XSOverlayの通知が表示されます。
+- `Play Sound` セーブ時に通知音声を再生します。
+  - ダブルクリックして任意の音声ファイルを選択します。（wavファイルのみ）
+  - 右クリックして音声ファイルを「default.wav」に戻します。
+- `Colorful Objectives` 「Objectives」ウィンドウ内のアイテムをゲーム内のアイテムと同じ色で表示します。
+- `Auto Discord Backup` [discord webhook](##how-to-properly-configure-automatic-discord-backup-using-webhooks)を使用して、プレイ中に新しいコードのバックアップを Discord チャンネルに自動的にアップロードします。
+- `Check For Updates` クリックすると、本家の github リポジトリで新しいリリースがチェックされ、自動更新を試すように求められます。
+<details><summary>プレビュー</summary><p> <img src="Resources/settings.png" > </p></details>
 
-### Right Click Menus
-- ### Log Dates (Left Panel)
-  * `Import` You can enter your own code and save it in that collection.
-  * `Rename` Lets you rename a collection.
-  * `Delete` Deletes the entire log date from the database.
-- ### Save Codes (Right Panel)
-  * `Add to` Lets you save or favorite this code to a separated custom collection with a name of your choice.
-  * `Edit Note` You can attach a note to this save code, so you can recognize it better.
-  * `Backup` Forces a backup upload to Discord if **Auto Discord Backup** is configured on settings.
-  * `Delete` Deletes just this save code from the database.
+### メニュー
+- ### ログの日付 (左パネル)
+  * `Import` セーブコードをインポートして保存します。
+  * `Rename` 名前を変更します。
+  * `Delete` データベースからログの日付全体を削除します。
+- ### セーブコード (右パネル)
+  * `Add to` このコードを、任意の名前で別のカスタム コレクションに保存したり、お気に入りに追加したりできます。
+  * `Edit Note` このセーブコードにメモを添付できます。
+  * `Backup` 設定で`Auto Discord Backup`が構成されている場合、Discord へのバックアップのアップロードを強制します。
+  * `Delete` 指定したセーブコードをデータベースから削除します。
   
-### Objectives Window
-- This window gives you a list of unlockables that you can check to track your progress. Just click on the things you already unlocked.
+### Objectives ウィンドウ
+- このウィンドウには、進捗状況を追跡するために確認できるロック解除可能な項目のリストが表示されます。すでにロック解除したものをクリックするだけです。
 
-# 📋 FAQ:
+# 📋 よくある質問
 
-> ## How do I use this?
-> 1. Download on the [<u>Latest Release</u>](https://github.com/nomlas/ToNSaveManager/releases/latest), the compressed file called `ToNSaveManager.zip`.
-> 2. Extract the contents of the **.zip** file into a folder of your choice.
-> 3. Open `ToNSaveManager.exe`.
-> 4. Select the log date on the left, then click one of the saves in the right.
-> 5. Your code is now in the clipboard, go to VRChat and paste the code in the input field.
+> ## 使い方を教えてください。
+> 1. [<u>最新リリース</u>](https://github.com/nomlas/ToNSaveManager/releases/latest)から、`ToNSaveManager.zip`をダウンロードしてください。
+> 2. zipファイルの中身を任意のフォルダーに解凍します。
+> 3. `ToNSaveManager.exe`を開いてください。
+> 4. 左側のログの日付を選択し、右側のセーブコードのいずれかをクリックします。
+> 5. コードがクリップボードに保存されたので、VRChat 上で入力欄にコードを貼り付けます。
 
-> ## Where can I request a feature?
-> If you want to suggest new features or changes, you can open an Issue here or you can ping me on the official [Toren Discord](https://discord.gg/bus-to-nowhere) as @**Kittenji**
+> ## 機能をリクエストするにはどこに連絡すればいいでしょうか？
+> 新しい機能や変更を提案したい場合は、[本家レポジトリ](https://github.com/ChrisFeline/ToNSaveManager)でIssueを開くか、[Toren Discord](https://discord.gg/bus-to-nowhere)で@**Kittenji**として連絡してください。
 
-> ## How does it work?
-> The world periodically saves a snapshot of your progress in the VRChat log files.
+> ## どのように機能しますか？
+> ToNは定期的にあなたの進行状況のスナップショットを VRChat ログ ファイルに保存します。
 > 
-> Initially, the program will scan your logs at `%LOCALAPPDATA%Low\VRChat\VRChat` and recover previous **Save Codes** in your logs. Then it will continue detecting new codes as you play.
+> 最初に、プログラムは`%LOCALAPPDATA%Low\VRChat\VRChat`にあるログをスキャンし、ログに残っている過去のセーブコードを回復します。その後、プレイ中に新しいコードを検出し続けます。
 
-> ## Why is it not showing anything despite previously playing Terrors?
-> There's the possibility that you have **logging** disabled.
-> You can enable it by opening your Quick Menu, go to settings, scroll all the way down and turn logging **on**.
+> ## ToNをプレイしたのに何も表示されません。
+> **ログの出力**が無効になっている可能性があります。
+> クイック メニューを開いて設定を開き、一番下までスクロールしてログの出力を有効にしてください。
 > <details>
-> <summary><b>Show Image</b></summary>
+> <summary><b>画像を表示</b></summary>
 > <p> <img src="Resources/logging.png" height="420px" > </p>
 > </details>
 
-> ## How to properly configure Automatic Discord Backup using Webhooks?
-> You can set a Discord webhook url to automatically upload your codes to a discord channel.
+> ## Webhook を使用して自動 Discord バックアップを適切に構成するにはどうすればよいですか？
+> Discord の Webhook URL を設定すると、コードが Discord チャンネルに自動的にアップロードされます。
 >
-> - Just go to your preferred channel on your discord server.
-> - Click **Edit Channel** and then go to **Integrations**.
-> - Add a webhook integration to this channel. *You can give it a name and a profile picture*.
-> - Copy the webhook url.
-> - Open settings on the Save Manager app.
-> - Enable `Auto Discord Backup`, you will see a text input popup.
-> - Paste your webhook url in the text field.
-> - Click **save**.
+> - Discord サーバー上のアップロードしたいチャンネルに移動します。
+> - 「**チャンネルの編集**」をクリックし、「**連携サービス**」に移動します。
+> - 「**ウェブフックを作成**」をクリックします。名前とプロフィール写真を指定できます。
+> - Webhook URL をコピーします。
+> - このアプリで設定画面を開きます。
+> - `Auto Discord Backup`を有効にすると、テキスト入力ポップアップが表示されます。
+> - **save**をクリックします。
 > 
 > NOTE: If you want to test this functionality, you can right click on a save entry then click **Backup**. If everything is right, save will be uploaded to the discord channel.
 > <details>
-> <summary><b>Show Discord Screenshots</b></summary>
+> <summary><b>Discordのスクリーンショットを表示</b></summary>
 > <p> <img src="Resources/Webhook/screenshot_0.png" height="auto" > </p>
 > <p> <img src="Resources/Webhook/screenshot_1.png" width="682px" > </p>
 > <p> <img src="Resources/Webhook/screenshot_2.png" width="512px" > </p>
 > </details>
 
-> ## Why is the .exe so big? >100MB
-> The exe is bundled with the .NET runtime that it's required to run the program. Using a command line argument for dotnet publishing: `--self-contained true -p:PublishSingleFile=true` <br>
-> This adds size to the file, but ensures that the program runs independently without relying on a previous .NET installation.
+> ## なぜexeファイルが100MBを超えているのですか？
+> exe には、プログラムを実行するために必要な .NET ランタイムが内包されています。 dotnetの公開に`--self-contained true -p:PublishSingleFile=true`というコマンド ライン引数を使用しました。 <br>
+> これにより、ファイルのサイズは大きくなりますが、以前の .NET インストールに依存せずにプログラムが独立して実行されるようになります。
 >
-> This is so people that download this program does not have to go download the .NET runtime framework themselves. And it's ready to run without any extra actions from the user.
+> これにより、このプログラムをダウンロードするユーザーは、.NET ランタイム フレームワークを自分でダウンロードする必要がなくなります。また、ユーザーによる追加操作なしですぐに実行できます。
 >
-> The program is compiled from the source using Github actions, you can see the full arguments in [the workflow file](https://github.com/nomlas/ToNSaveManager/blob/a0d503b02fe25fde1b36ca9807756f1830c8e7a8/.github/workflows/dotnet-desktop.yml#L46C45-L46C45).
+> プログラムは GitHub Actions を使用してソースからコンパイルされ、[ワー​​クフロー ファイル](https://github.com/nomlas/ToNSaveManager/blob/a0d503b02fe25fde1b36ca9807756f1830c8e7a8/.github/workflows/dotnet-desktop.yml#L46C45-L46C45)で完全な引数を確認できます。
 
 
-> ## Is this against VRChats ToS?
-> - **Short Answer:** No
+> ## これはVRChatの利用規約に違反しますか？
+> - 簡潔に言うと、答えは No です。
 >
-> This is an external tool that uses local plain text files that VRChat writes to the Local APPDATA folder.
-> We are allowed to read these files since it does not modify or alter the game in any way.
-> **This is not a mod or a cheat.**
+> これは、VRChat が Local APPDATA フォルダーに書き込むローカル プレーン テキスト ファイルを使用する外部ツールです。
+> ゲームを一切変更または改変しないため、これらのファイルを読み取ることは許可されています。
+> **MODやチートではありません。**
 
-> ### Please do <u>NOT</u> message Beyond about suggestions or problems with this tool.
-> You can report problems or suggestions under the [Issues](https://github.com/ChrisFeline/ToNSaveManager/issues) tab on this repo. Alternatively see contact information below.
+> ### このツールに関する提案や問題について、Beyond にメッセージを送信しないでください。
+> 本家レポジトリの[Issues](https://github.com/ChrisFeline/ToNSaveManager/issues) タブで問題や提案を報告できます。または、以下の連絡先情報を参照してください。
 
-# 📫 Contact:
+# 📫 連絡先
 > **Discord:** [@Kittenji](https://discord.gg/HGk2RQX)<br>
 > **VRChat:** [Kittenji](https://vrchat.com/home/user/usr_7ac745b8-e50e-4c9c-95e5-8e7e3bcde682)
-> ## Say hi if you see me playing [Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)!
+> ## 私が[Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)をプレイしているのを見かけたら声をかけてください！
 > <p> <img src="Resources/loop.gif" alt="Preview" title="AAAAAA!"> </p>
 
-# ❤️ Support:
-> If you want to support the development of this tool you can [Buy Me A Coffee ♥](https://ko-fi.com/kittenji) on ko-fi.
+# ❤️ サポート
+> このツールの開発をサポートしたい場合は、ko-fi で[Coffee ♥](https://ko-fi.com/kittenji)を購入できます。
