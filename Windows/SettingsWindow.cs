@@ -238,7 +238,7 @@ namespace ToNSaveManager.Windows
         }
 
         private void languageSelectBox_SelectedIndexChanged(object sender, EventArgs e) {
-            if (!FilledLanguages || languageSelectBox.SelectedIndex < 0) return;
+            if (!FilledLanguages || languageSelectBox.SelectedIndex < 0 || languageSelectBox.SelectedItem == null) return;
             LANG.LangKey langKey = (LANG.LangKey)languageSelectBox.SelectedItem;
 
             if (LANG.SelectedKey != langKey.Key) {
@@ -250,9 +250,24 @@ namespace ToNSaveManager.Windows
             }
         }
 
+        private void languageSelect_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void languageSelect_DragDrop(object sender, DragEventArgs e) {
+            string[]? files = (string[]?)e.Data?.GetData(DataFormats.FileDrop);
+            if (files == null) return;
+
+            foreach (string file in files) {
+                if (file.EndsWith(".json"))
+                    LANG.AddFromFile(file);
+            }
+        }
+
         private bool FilledLanguages;
-        private void FillLanguageBox() {
+        internal void FillLanguageBox() {
             FilledLanguages = false;
+            languageSelectBox.Items.Clear();
             foreach (var lang in LANG.AvailableLang) {
                 int index = languageSelectBox.Items.Count;
                 languageSelectBox.Items.Add(lang);

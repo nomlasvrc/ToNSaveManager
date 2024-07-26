@@ -92,6 +92,13 @@ If your parameters are not being received properly... try resetting the OSC conf
 <img src="Resources/osc_reset.png" >
 </p></details>
 
+# 🌐 Available Translations
+| Language | Translator |
+| -------- | ---------- |
+| English  | -          |
+| Spanish  | -          |
+| Japanese | [github.com/nomlasvrc](https://github.com/nomlasvrc) <br> [twitter.com/nomlasvrc](https://twitter.com/nomlasvrc) |
+
 # 📋 FAQ:
 
 > ## How do I use this?
@@ -154,6 +161,7 @@ If your parameters are not being received properly... try resetting the OSC conf
 > **This is not a mod or a cheat.**
 
 > ## How to contribute with translations?
+> > **NOTE**: You can test your language file as you work by dragging the `.json` file into the **Language** box in the **Settings** window.
 > - Fork clone the [localization](https://github.com/ChrisFeline/ToNSaveManager/tree/localization) branch.
 > - Create a copy of the `en-US.json` language file into `/Localization/Language`
 > - Rename it to your local ISO language name. For example `ja-JP.json`
@@ -163,7 +171,7 @@ If your parameters are not being received properly... try resetting the OSC conf
 > 	* Do **NOT** create a pull request into the `main` branch.
 > 	* Make sure the only edited file is the new added language `.json` file, any other contribution in the source code unrelated to this translation will be rejected.
 > ### OR
-> - Download the file [`en-US.json`](#) from this repo.
+> - Download the file [`en-US.json`](https://github.com/ChrisFeline/ToNSaveManager/blob/main/Localization/Language/en-US.json) from this repo.
 > - Rename it to your local ISO language name. For example `ja-JP.json`
 > - You can [contact me](#-contact) on discord and I'll review the changes.
 
@@ -171,8 +179,8 @@ If your parameters are not being received properly... try resetting the OSC conf
 > You can report problems or suggestions under the [Issues](https://github.com/ChrisFeline/ToNSaveManager/issues) tab on this repo. Alternatively see contact information below.
 
 # 📫 Contact:
-> **Discord:** [@Kittenji](https://discord.gg/HGk2RQX)<br>
-> **VRChat:** [Kittenji](https://vrchat.com/home/user/usr_7ac745b8-e50e-4c9c-95e5-8e7e3bcde682)
+> - **Discord:** [@Kittenji](https://discord.gg/HGk2RQX)<br>
+> - **VRChat:** [Kittenji](https://vrchat.com/home/user/usr_7ac745b8-e50e-4c9c-95e5-8e7e3bcde682)
 > ## Say hi if you see me playing [Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)!
 > <p> <img src="Resources/loop.gif" alt="Preview" title="AAAAAA!"> </p>
 
