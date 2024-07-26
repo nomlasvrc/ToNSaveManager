@@ -22,6 +22,7 @@
 - 以前に検出されたセーブ コードはローカル データベースに保存されるため、VRChat が時間の経過とともにログを削除した場合でも、セーブ コードの履歴はローカルに安全に残ります。
 
 ### 設定画面
+- `Check For Updates` クリックすると、本家の github リポジトリで新しいリリースがチェックされ、自動更新を試すように求められます。
 - `Auto Clipboard Copy` 新しいセーブコードを自動的にクリップボードにコピーします。
 - `Collect Player Names` セーブコードには、インスタンスにいたプレイヤーが表示されます。
 - `XSOverlay Popup` 新しいセーブコードが検出されると、XSOverlayの通知が表示されます。
@@ -30,7 +31,7 @@
   - 右クリックして音声ファイルを「default.wav」に戻します。
 - `Colorful Objectives` 「Objectives」ウィンドウ内のアイテムをゲーム内のアイテムと同じ色で表示します。
 - `Auto Discord Backup` [discord webhook](##how-to-properly-configure-automatic-discord-backup-using-webhooks)を使用して、プレイ中に新しいコードのバックアップを Discord チャンネルに自動的にアップロードします。
-- `Check For Updates` クリックすると、本家の github リポジトリで新しいリリースがチェックされ、自動更新を試すように求められます。
+- `Send OSC Parameters` Sends avatar parameters to VRChat using OSC. Check the [documentation](#osc-documentation) below for more info.
 <details><summary>プレビュー</summary><p> <img src="Resources/settings.png" > </p></details>
 
 ### メニュー
@@ -46,6 +47,49 @@
   
 ### Objectives ウィンドウ
 - このウィンドウには、進捗状況を追跡するために確認できるロック解除可能な項目のリストが表示されます。すでにロック解除したものをクリックするだけです。
+
+## OSC Documentation
+<details><summary>Parameter Names & Types</summary><p>
+<pre>
+Parameter Name | Type |
+---------------|------|--------------------------
+ToN_RoundType  | INT  | The current round type.
+ToN_Terror1    | INT  | The current terror index.
+ToN_Terror2    | INT  | The second terror index.
+ToN_Terror3    | INT  | The third terror index.
+ToN_OptedIn    | BOOL | Is the player opted-in at the lobby
+ToN_Saboteur   | BOOL | Is the player currently the Saboteur
+</pre>
+</p></details>
+
+<details><summary>Round Type Values</summary><p>
+<pre>
+ 0  =  Unknown
+ 1  =  Classic
+ 2  =  Fog
+ 3  =  Punished
+ 4  =  Sabotage
+ 5  =  Cracked
+ 6  =  Bloodbath
+ 7  =  Midnight
+ 8  =  Alternate
+ 9  =  Mystic_Moon
+10  =  Blood_Moon
+11  =  Twilight
+12  =  Solstice
+13  =  RUN
+14  =  Eight_Pages
+15  =  Cold_Night
+</pre>
+</p></details>
+
+<details><summary>OSC Troubleshooting</summary><p>
+If your parameters are not being received properly... try resetting the OSC config.
+
+<p>You can do this by opening your <b>Radial menu</b>, open <b>OSC</b>, then click <b>Reset Config</b>.</p>
+
+<img src="Resources/osc_reset.png" >
+</p></details>
 
 # 📋 よくある質問
 
@@ -106,6 +150,21 @@
 > これは、VRChat が Local APPDATA フォルダーに書き込むローカル プレーン テキスト ファイルを使用する外部ツールです。
 > ゲームを一切変更または改変しないため、これらのファイルを読み取ることは許可されています。
 > **MODやチートではありません。**
+
+> ## How to contribute with translations?
+> - Fork clone the [localization](https://github.com/ChrisFeline/ToNSaveManager/tree/localization) branch.
+> - Create a copy of the `en-US.json` language file into `/Localization/Language`
+> - Rename it to your local ISO language name. For example `ja-JP.json`
+> - Translate the strings contained within this file into your target language.
+> 	* Keep important string replacement tokens like: `{0}`, `{1}` or `$$MAIN.SETTINGS$$` etc...
+> - Create a pull request.
+> 	* Do **NOT** create a pull request into the `main` branch.
+> 	* Make sure the only edited file is the new added language `.json` file, any other contribution in the source code unrelated to this translation will be rejected.
+> ### OR
+> - Download the file [`en-US.json`](#) from this repo.
+> - Rename it to your local ISO language name. For example `ja-JP.json`
+> - You can [contact me](#-contact) on discord and I'll review the changes.
+
 
 > ### このツールに関する提案や問題について、Beyond にメッセージを送信しないでください。
 > 本家レポジトリの[Issues](https://github.com/ChrisFeline/ToNSaveManager/issues) タブで問題や提案を報告できます。または、以下の連絡先情報を参照してください。

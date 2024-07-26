@@ -8,6 +8,7 @@ using ToNSaveManager.Windows;
 using OnLineArgs = ToNSaveManager.Utils.LogWatcher.OnLineArgs;
 using LogContext = ToNSaveManager.Utils.LogWatcher.LogContext;
 using ToNSaveManager.Utils.Discord;
+using ToNSaveManager.Localization;
 
 namespace ToNSaveManager
 {
@@ -18,7 +19,7 @@ namespace ToNSaveManager
         // internal static readonly AppSettings Settings = AppSettings.Import();
         internal static readonly SaveData SaveData = SaveData.Import();
         internal static MainWindow? Instance;
-        private static bool Started;
+        internal static bool Started;
 
         public MainWindow()
         {
@@ -68,6 +69,8 @@ namespace ToNSaveManager
 
         private void mainWindow_Shown(object sender, EventArgs e)
         {
+            LocalizeContent();
+
             if (Started) return;
 
             FirstImport();
@@ -78,6 +81,28 @@ namespace ToNSaveManager
 
             Started = true;
             SetTitle(null);
+
+            LilOSC.SendData(true);
+        }
+
+        internal void LocalizeContent() {
+            LANG.C(btnSettings, "MAIN.SETTINGS");
+            LANG.C(btnObjectives, "MAIN.OBJECTIVES");
+            LANG.C(linkWiki, "MAIN.WIKI");
+            LANG.C(linkSupport, "MAIN.SUPPORT");
+
+            LANG.C(importToolStripMenuItem, "MAIN.CTX_IMPORT"); // .TITLE
+            LANG.C(renameToolStripMenuItem, "MAIN.CTX_RENAME"); // .TITLE
+            LANG.C(deleteToolStripMenuItem, "MAIN.CTX_DELETE"); // .TITLE
+
+            LANG.C(ctxMenuEntriesCopyTo, "MAIN.CTX_ADD_TO");
+            LANG.C(ctxMenuEntriesNew, "MAIN.CTX_ADD_TO.NEW");
+            LANG.C(ctxMenuEntriesNote, "MAIN.CTX_EDIT_NOTE");
+            LANG.C(ctxMenuEntriesBackup, "MAIN.CTX_BACKUP");
+            LANG.C(ctxMenuEntriesDelete, "MAIN.CTX_DELETE");
+
+            Entry.LocalizeContent();
+            DSWebHook.LocalizeContent();
         }
         #endregion
 
@@ -115,12 +140,12 @@ namespace ToNSaveManager
             History h = (History)listBoxKeys.SelectedItem;
             if (!h.IsCustom) return;
 
-            EditResult edit = EditWindow.Show(string.Empty, "Import Code", this);
+            EditResult edit = EditWindow.Show(string.Empty, LANG.S("MAIN.CTX_IMPORT.TITLE") ?? "Import Title", this);
             if (edit.Accept && !string.IsNullOrWhiteSpace(edit.Text))
             {
                 string content = edit.Text.Trim();
                 AddCustomEntry(new Entry(content, DateTime.Now) { Note = "Imported" }, h);
-                Export(true);
+                Export();
             }
         }
 
@@ -129,7 +154,7 @@ namespace ToNSaveManager
             if (listBoxKeys.SelectedItem == null) return;
             History h = (History)listBoxKeys.SelectedItem;
 
-            EditResult edit = EditWindow.Show(h.Name, "Set Collection Name", this);
+            EditResult edit = EditWindow.Show(h.Name, LANG.S("MAIN.CTX_RENAME.TITLE") ?? "Set Collection Name", this);
             if (edit.Accept && !string.IsNullOrWhiteSpace(edit.Text))
             {
                 string title = edit.Text.Trim();
@@ -138,7 +163,8 @@ namespace ToNSaveManager
                 h.Name = title;
                 listBoxKeys.Refresh();
                 SetTitle(title);
-                Export(true);
+
+                Export(h);
             }
         }
 
@@ -148,7 +174,10 @@ namespace ToNSaveManager
             if (selectedIndex != -1 && listBoxKeys.SelectedItem != null)
             {
                 History h = (History)listBoxKeys.SelectedItem;
-                DialogResult result = MessageBox.Show($"Are you SURE that you want to delete this entry?\n\nEvery code from '{h}' will be permanently deleted.\nThis operation is not reversible!", "Deleting Entry: " + h.ToString(), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show(
+                    LANG.S("MAIN.CTX_DELETE_ALL.SUBTITLE", h.ToString()) ?? $"Are you SURE that you want to delete this entry?\n\nEvery code from '{h}' will be permanently deleted.\nThis operation is not reversible!",
+                    LANG.S("MAIN.CTX_DELETE_ALL.TITLE", h.ToString()) ?? "Deleting Entry: " + h.ToString(),
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.OK)
                 {
@@ -157,7 +186,7 @@ namespace ToNSaveManager
                     SaveData.Remove(h);
                     UpdateEntries();
                     SetTitle(null);
-                    Export(true);
+                    Export(null, true);
                 }
             }
         }
@@ -193,7 +222,7 @@ namespace ToNSaveManager
                 {
                     Entry entry = (Entry)listBoxEntries.SelectedItem;
                     entry.CopyToClipboard();
-                    MessageBox.Show("Copied to clipboard!\n\nYou can now paste the code in game.", "Copied", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(LANG.S("MESSAGE.COPY_TO_CLIPBOARD") ?? "Copied to clipboard!\n\nYou can now paste the code in game.", LANG.S("MESSAGE.COPY_TO_CLIPBOARD.TITLE") ?? "Copied", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 listBoxEntries.SelectedIndex = -1;
@@ -304,12 +333,12 @@ namespace ToNSaveManager
         {
             if (ContextEntry != null)
             {
-                EditResult edit = EditWindow.Show(ContextEntry.Note, "Note Editor", this);
+                EditResult edit = EditWindow.Show(ContextEntry.Note, LANG.S("MAIN.CTX_EDIT_NOTE.TITLE") ?? "Note Editor", this);
                 if (edit.Accept && !edit.Text.Equals(ContextEntry.Note, StringComparison.Ordinal))
                 {
                     ContextEntry.Note = edit.Text.Trim();
                     listBoxEntries.Refresh();
-                    Export(true);
+                    Export(ContextEntry.Parent);
                 }
             }
 
@@ -335,13 +364,16 @@ namespace ToNSaveManager
             History h = (History)listBoxKeys.SelectedItem;
             if (ContextEntry != null)
             {
-                DialogResult result = MessageBox.Show($"Are you SURE that you want to delete this entry?\n\nDate: {ContextEntry.Timestamp}\nNote: {ContextEntry.Note}\n\nThis operation is not reversible!", "Deleting Entry: " + h.ToString(), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show(
+                    LANG.S("MAIN.CTX_DELETE_ENTRY.SUBTITLE", h.ToString()) ?? $"Are you SURE that you want to delete this entry?\n\nDate: {ContextEntry.Timestamp}\nNote: {ContextEntry.Note}\n\nThis operation is not reversible!",
+                    LANG.S("MAIN.CTX_DELETE_ENTRY.TITLE", h.ToString()) ?? "Deleting Entry: " + h.ToString(),
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.OK)
                 {
-                    h.Entries.Remove(ContextEntry);
+                    h.Database.Remove(ContextEntry);
                     listBoxEntries.Items.Remove(ContextEntry);
-                    Export(true);
+                    Export(ContextEntry.Parent);
                 }
             }
 
@@ -440,8 +472,8 @@ namespace ToNSaveManager
             const string message = "<color=#ff9999><b>ToN</b></color><color=grey>:</color> <color=#adff2f>Save Data Stored</color>";
             const string msgtest = "<color=#ff9999><b>ToN</b></color><color=grey>:</color> <color=#adff2f>Notifications Enabled</color>";
 
-            if (test) XSOverlay.Send(msgtest, 1);
-            else XSOverlay.Send(message);
+            if (test) XSOverlay.Send(LANG.S("SETTINGS.XSOVERLAY.TOGGLE") ?? msgtest, 1);
+            else XSOverlay.Send(LANG.S("SETTINGS.XSOVERLAY.MESSAGE") ?? message);
         }
         #endregion
 
@@ -461,7 +493,7 @@ namespace ToNSaveManager
             History selected = (History)listBoxKeys.SelectedItem;
             SetTitle(selected.Name);
 
-            foreach (Entry entry in selected.Entries)
+            foreach (Entry entry in selected.Database)
                 listBoxEntries.Items.Add(entry);
         }
 
@@ -504,6 +536,9 @@ namespace ToNSaveManager
         const string ROUND_WON_KEYWORD = "Player Won";
         const string ROUND_LOST_KEYWORD = "Player lost,";
 
+        const string ROUND_IS_SABO_KEY = "rSabo";
+        const string ROUND_IS_SABO = "You are the sussy baka of cringe naenae legend";
+
         const string KILLER_MATRIX_KEYWORD = "Killers have been set - ";
         const string KILLER_ROUND_TYPE_KEYWORD = " // Round type is ";
 
@@ -521,6 +556,7 @@ namespace ToNSaveManager
         {
             CopyRecent();
             Export();
+            LilOSC.SendData();
         }
 
         private bool HandleSaveCode(string line, DateTime timestamp, LogContext context)
@@ -565,6 +601,12 @@ namespace ToNSaveManager
                 {
                     context.Rem(ROUND_KILLERS_KEY);
                     context.Rem(ROUND_RESULT_KEY);
+                    context.Rem(ROUND_IS_SABO_KEY);
+                }
+
+                if (context.IsRecent) {
+                    LilOSC.SetTerrorMatrix(TerrorMatrix.Empty);
+                    LilOSC.SetOptInStatus(isOptedIn);
                 }
                 return true;
             }
@@ -575,11 +617,19 @@ namespace ToNSaveManager
 
             if (!isOptedIn) return false;
 
+            if (line.StartsWith(ROUND_IS_SABO)) {
+                context.Set(ROUND_IS_SABO_KEY, true);
+                return true;
+            }
+
             // Track round participation results
             isOptedIn = line.StartsWith(ROUND_WON_KEYWORD);
             if (isOptedIn || line.StartsWith(ROUND_LOST_KEYWORD))
             {
                 context.Set(ROUND_RESULT_KEY, isOptedIn ? ToNRoundResult.W : ToNRoundResult.D);
+                context.Rem(ROUND_IS_SABO_KEY);
+
+                if (context.IsRecent) LilOSC.SetTerrorMatrix(TerrorMatrix.Empty);
                 return true;
             }
 
@@ -591,7 +641,7 @@ namespace ToNSaveManager
 
                 string roundType = line.Substring(rndInd + KILLER_ROUND_TYPE_KEYWORD.Length).Trim();
                 string[] kMatrixRaw = line.Substring(index, rndInd - index).Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-                int[] killerMatrix = new int[kMatrixRaw.Length];
+                int[] killerMatrix = new int[3];
 
                 for (int i = 0; i < kMatrixRaw.Length; i++)
                 {
@@ -599,7 +649,12 @@ namespace ToNSaveManager
                 }
 
                 TerrorMatrix terrorMatrix = new TerrorMatrix(roundType, killerMatrix);
+                terrorMatrix.IsSaboteour = context.Get<bool>(ROUND_IS_SABO_KEY);
+
                 context.Set(ROUND_KILLERS_KEY, terrorMatrix);
+                context.Rem(ROUND_IS_SABO_KEY);
+
+                if (context.IsRecent) LilOSC.SetTerrorMatrix(terrorMatrix);
                 return true;
             }
 
@@ -610,29 +665,39 @@ namespace ToNSaveManager
         #region Data
         private Entry? RecentData;
 
-        private void Export(bool force = false) =>
+        private void Export(History? h = null, bool force = false)
+        {
+            if (h != null) h.SetDirty();
             SaveData.Export(force);
+        }
 
         private void FirstImport()
         {
+            History? temp = null;
+
             for (int i = 0; i < SaveData.Count; i++)
             {
-                AddKey(SaveData[i], i);
-                if (SaveData[i].IsCustom) continue;
+                History h = SaveData[i];
+                AddKey(h, i);
+                if (h.IsCustom) continue;
 
-                // First should always be the most recent, hopefully
-                Entry? first = SaveData[i].Entries.FirstOrDefault();
+                if (temp == null || temp.Timestamp < h.Timestamp) temp = h;
+            }
+
+            if (Settings.Get.AutoCopy)
+            {
+                Entry? first = temp?.Database.FirstOrDefault();
                 if (first != null) SetRecent(first);
             }
 
-            CopyRecent();
+            // CopyRecent();
         }
 
         private void AddCustomEntry(Entry entry, History? collection)
         {
             if (collection == null)
             {
-                EditResult edit = EditWindow.Show(string.Empty, "Set Collection Name", this);
+                EditResult edit = EditWindow.Show(string.Empty, LANG.S("MAIN.CTX_RENAME.TITLE") ?? "Set Collection Name", this);
                 if (edit.Accept && !string.IsNullOrWhiteSpace(edit.Text))
                 {
                     string title = edit.Text.Trim();
@@ -647,7 +712,7 @@ namespace ToNSaveManager
             if (listBoxKeys.SelectedItem == collection)
                 InsertSafe(listBoxEntries, ind, entry);
 
-            Export(true);
+            Export(collection, true);
         }
         private void AddLogEntry(string dateKey, string content, DateTime timestamp, LogContext context)
         {
