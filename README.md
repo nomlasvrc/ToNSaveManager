@@ -22,7 +22,7 @@
 - 以前に検出されたセーブ コードはローカル データベースに保存されるため、VRChat が時間の経過とともにログを削除した場合でも、セーブ コードの履歴はローカルに安全に残ります。
 
 ### 設定画面
-- `Check For Updates` When clicked, it will check this github repo for new releases, and prompt you to try an automatic update.
+- `Check For Updates` クリックすると、本家の github リポジトリで新しいリリースがチェックされ、自動更新を試すように求められます。
 - `Auto Clipboard Copy` 新しいセーブコードを自動的にクリップボードにコピーします。
 - `Collect Player Names` セーブコードには、インスタンスにいたプレイヤーが表示されます。
 - `XSOverlay Popup` 新しいセーブコードが検出されると、XSOverlayの通知が表示されます。
@@ -31,7 +31,7 @@
   - 右クリックして音声ファイルを「default.wav」に戻します。
 - `Colorful Objectives` 「Objectives」ウィンドウ内のアイテムをゲーム内のアイテムと同じ色で表示します。
 - `Auto Discord Backup` [discord webhook](##how-to-properly-configure-automatic-discord-backup-using-webhooks)を使用して、プレイ中に新しいコードのバックアップを Discord チャンネルに自動的にアップロードします。
-- `Check For Updates` クリックすると、本家の github リポジトリで新しいリリースがチェックされ、自動更新を試すように求められます。
+- `Send OSC Parameters` Sends avatar parameters to VRChat using OSC. Check the [documentation](#osc-documentation) below for more info.
 <details><summary>プレビュー</summary><p> <img src="Resources/settings.png" > </p></details>
 
 ### メニュー
