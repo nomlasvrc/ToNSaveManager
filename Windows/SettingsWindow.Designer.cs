@@ -26,10 +26,10 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             components = new System.ComponentModel.Container();
             groupBoxGeneral = new GroupBox();
+            checkOSCEnabled = new CheckBox();
             checkDiscordBackup = new CheckBox();
             checkShowWinLose = new CheckBox();
             checkSaveTerrorsNote = new CheckBox();
@@ -40,7 +40,7 @@
             groupBoxNotifications = new GroupBox();
             checkPlayAudio = new CheckBox();
             checkXSOverlay = new CheckBox();
-            groupBox1 = new GroupBox();
+            groupBoxTime = new GroupBox();
             checkShowDate = new CheckBox();
             checkInvertMD = new CheckBox();
             checkShowSeconds = new CheckBox();
@@ -52,19 +52,21 @@
             ctxItemPickFolder = new ToolStripMenuItem();
             ctxItemResetToDefault = new ToolStripMenuItem();
             toolTip = new ToolTip(components);
-            groupBox2 = new GroupBox();
+            groupBoxStyle = new GroupBox();
             checkColorObjectives = new CheckBox();
+            languageSelectBox = new ComboBox();
             groupBoxGeneral.SuspendLayout();
             groupBoxNotifications.SuspendLayout();
-            groupBox1.SuspendLayout();
+            groupBoxTime.SuspendLayout();
             ctxData.SuspendLayout();
-            groupBox2.SuspendLayout();
+            groupBoxStyle.SuspendLayout();
             SuspendLayout();
             // 
             // groupBoxGeneral
             // 
             groupBoxGeneral.AutoSize = true;
             groupBoxGeneral.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBoxGeneral.Controls.Add(checkOSCEnabled);
             groupBoxGeneral.Controls.Add(checkDiscordBackup);
             groupBoxGeneral.Controls.Add(checkShowWinLose);
             groupBoxGeneral.Controls.Add(checkSaveTerrorsNote);
@@ -74,12 +76,25 @@
             groupBoxGeneral.Controls.Add(checkSkipParsedLogs);
             groupBoxGeneral.Dock = DockStyle.Top;
             groupBoxGeneral.ForeColor = Color.White;
-            groupBoxGeneral.Location = new Point(8, 8);
+            groupBoxGeneral.Location = new Point(8, 31);
             groupBoxGeneral.Name = "groupBoxGeneral";
-            groupBoxGeneral.Size = new Size(268, 148);
+            groupBoxGeneral.Size = new Size(268, 166);
             groupBoxGeneral.TabIndex = 0;
             groupBoxGeneral.TabStop = false;
             groupBoxGeneral.Text = "General";
+            // 
+            // checkOSCEnabled
+            // 
+            checkOSCEnabled.Dock = DockStyle.Top;
+            checkOSCEnabled.Location = new Point(3, 145);
+            checkOSCEnabled.Name = "checkOSCEnabled";
+            checkOSCEnabled.Padding = new Padding(3, 0, 3, 0);
+            checkOSCEnabled.Size = new Size(262, 18);
+            checkOSCEnabled.TabIndex = 7;
+            checkOSCEnabled.Tag = "OSCEnabled|Sends avatar parameters to VRChat using OSC. Right click this entry to open documentation about parameter names and types.";
+            checkOSCEnabled.Text = "Send OSC Parameters";
+            checkOSCEnabled.UseVisualStyleBackColor = true;
+            checkOSCEnabled.MouseUp += checkOSCEnabled_MouseUp;
             // 
             // checkDiscordBackup
             // 
@@ -175,7 +190,7 @@
             groupBoxNotifications.Controls.Add(checkXSOverlay);
             groupBoxNotifications.Dock = DockStyle.Top;
             groupBoxNotifications.ForeColor = Color.White;
-            groupBoxNotifications.Location = new Point(8, 156);
+            groupBoxNotifications.Location = new Point(8, 197);
             groupBoxNotifications.Name = "groupBoxNotifications";
             groupBoxNotifications.Size = new Size(268, 58);
             groupBoxNotifications.TabIndex = 2;
@@ -209,22 +224,22 @@
             checkXSOverlay.Text = "XSOverlay Popup";
             checkXSOverlay.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupBoxTime
             // 
-            groupBox1.AutoSize = true;
-            groupBox1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox1.Controls.Add(checkShowDate);
-            groupBox1.Controls.Add(checkInvertMD);
-            groupBox1.Controls.Add(checkShowSeconds);
-            groupBox1.Controls.Add(check24Hour);
-            groupBox1.Dock = DockStyle.Top;
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(8, 214);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(268, 94);
-            groupBox1.TabIndex = 3;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Time Formatting";
+            groupBoxTime.AutoSize = true;
+            groupBoxTime.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBoxTime.Controls.Add(checkShowDate);
+            groupBoxTime.Controls.Add(checkInvertMD);
+            groupBoxTime.Controls.Add(checkShowSeconds);
+            groupBoxTime.Controls.Add(check24Hour);
+            groupBoxTime.Dock = DockStyle.Top;
+            groupBoxTime.ForeColor = Color.White;
+            groupBoxTime.Location = new Point(8, 255);
+            groupBoxTime.Name = "groupBoxTime";
+            groupBoxTime.Size = new Size(268, 94);
+            groupBoxTime.TabIndex = 3;
+            groupBoxTime.TabStop = false;
+            groupBoxTime.Text = "Time Formatting";
             // 
             // checkShowDate
             // 
@@ -280,7 +295,7 @@
             btnCheckForUpdates.FlatAppearance.BorderColor = Color.FromArgb(122, 122, 122);
             btnCheckForUpdates.FlatStyle = FlatStyle.Flat;
             btnCheckForUpdates.ForeColor = Color.White;
-            btnCheckForUpdates.Location = new Point(8, 356);
+            btnCheckForUpdates.Location = new Point(8, 393);
             btnCheckForUpdates.Name = "btnCheckForUpdates";
             btnCheckForUpdates.Size = new Size(209, 24);
             btnCheckForUpdates.TabIndex = 4;
@@ -295,7 +310,7 @@
             btnOpenData.FlatAppearance.BorderColor = Color.FromArgb(122, 122, 122);
             btnOpenData.FlatStyle = FlatStyle.Flat;
             btnOpenData.ForeColor = Color.White;
-            btnOpenData.Location = new Point(223, 356);
+            btnOpenData.Location = new Point(223, 393);
             btnOpenData.Name = "btnOpenData";
             btnOpenData.Size = new Size(53, 24);
             btnOpenData.TabIndex = 5;
@@ -337,19 +352,19 @@
             toolTip.InitialDelay = 500;
             toolTip.ReshowDelay = 100;
             // 
-            // groupBox2
+            // groupBoxStyle
             // 
-            groupBox2.AutoSize = true;
-            groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox2.Controls.Add(checkColorObjectives);
-            groupBox2.Dock = DockStyle.Top;
-            groupBox2.ForeColor = Color.White;
-            groupBox2.Location = new Point(8, 308);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(268, 40);
-            groupBox2.TabIndex = 6;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Style";
+            groupBoxStyle.AutoSize = true;
+            groupBoxStyle.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBoxStyle.Controls.Add(checkColorObjectives);
+            groupBoxStyle.Dock = DockStyle.Top;
+            groupBoxStyle.ForeColor = Color.White;
+            groupBoxStyle.Location = new Point(8, 349);
+            groupBoxStyle.Name = "groupBoxStyle";
+            groupBoxStyle.Size = new Size(268, 40);
+            groupBoxStyle.TabIndex = 6;
+            groupBoxStyle.TabStop = false;
+            groupBoxStyle.Text = "Style";
             // 
             // checkColorObjectives
             // 
@@ -363,6 +378,20 @@
             checkColorObjectives.Text = "Colorful Objectives";
             checkColorObjectives.UseVisualStyleBackColor = true;
             // 
+            // languageSelectBox
+            // 
+            languageSelectBox.BackColor = SystemColors.Window;
+            languageSelectBox.Dock = DockStyle.Top;
+            languageSelectBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            languageSelectBox.FlatStyle = FlatStyle.Flat;
+            languageSelectBox.FormattingEnabled = true;
+            languageSelectBox.Location = new Point(8, 8);
+            languageSelectBox.Name = "languageSelectBox";
+            languageSelectBox.Size = new Size(268, 23);
+            languageSelectBox.TabIndex = 7;
+            languageSelectBox.TabStop = false;
+            languageSelectBox.SelectedIndexChanged += languageSelectBox_SelectedIndexChanged;
+            // 
             // SettingsWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -370,13 +399,14 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(46, 52, 64);
-            ClientSize = new Size(284, 388);
-            Controls.Add(groupBox2);
+            ClientSize = new Size(284, 425);
+            Controls.Add(groupBoxStyle);
             Controls.Add(btnOpenData);
             Controls.Add(btnCheckForUpdates);
-            Controls.Add(groupBox1);
+            Controls.Add(groupBoxTime);
             Controls.Add(groupBoxNotifications);
             Controls.Add(groupBoxGeneral);
+            Controls.Add(languageSelectBox);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -392,9 +422,9 @@
             Load += SettingsWindow_Load;
             groupBoxGeneral.ResumeLayout(false);
             groupBoxNotifications.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
+            groupBoxTime.ResumeLayout(false);
             ctxData.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
+            groupBoxStyle.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -407,13 +437,13 @@
         private GroupBox groupBoxNotifications;
         private CheckBox checkPlayAudio;
         private CheckBox checkXSOverlay;
-        private GroupBox groupBox1;
+        private GroupBox groupBoxTime;
         private CheckBox checkInvertMD;
         private CheckBox checkShowSeconds;
         private CheckBox check24Hour;
         private Button btnOpenData;
         private ToolTip toolTip;
-        private GroupBox groupBox2;
+        private GroupBox groupBoxStyle;
         private CheckBox checkColorObjectives;
         private CheckBox checkSaveTerrorsNote;
         private CheckBox checkSaveTerrors;
@@ -425,5 +455,7 @@
         private ToolStripMenuItem ctxItemPickFolder;
         private ToolStripMenuItem ctxItemResetToDefault;
         private CheckBox checkDiscordBackup;
+        private CheckBox checkOSCEnabled;
+        private ComboBox languageSelectBox;
     }
 }
