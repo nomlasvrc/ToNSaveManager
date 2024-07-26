@@ -2,18 +2,18 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
     <Version>1.0.0.1</Version>
     <FileVersion>1.0.0.1</FileVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Localization\Language\en-US.json" />
-    <None Remove="Localization\Language\es-ES.json" />
+    <None Remove="Localization\Language\*.*" />
     <None Remove="notification.wav" />
     <None Remove="Resources\FiraCode.ttf" />
     <None Remove="Resources\index.json" />
@@ -26,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Language\es-ES.json" />
-    <EmbeddedResource Include="Localization\Language\en-US.json" />
+    <EmbeddedResource Include="Localization\Language\*.*" />
     <EmbeddedResource Include="Resources\index.json" />
     <EmbeddedResource Include="Resources\objectives.json" />
     <EmbeddedResource Include="Resources\xs_icon.png">
