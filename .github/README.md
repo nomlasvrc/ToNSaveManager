@@ -14,7 +14,7 @@
 
   [リリースを見る](https://github.com/ChrisFeline/ToNSaveManager/releases "現在と過去のリリースの一覧を表示") • 
   [セーブガイド](https://terror.moe/save "初心者向けのセーブとロードの方法") • 
-  [よくある質問](Docs/FAQ.md)
+  [よくある質問](../Docs/Localization/ja-JP/FAQ.md)
 </div>
 
 <p align="center">
@@ -37,8 +37,8 @@
 - `カラフルなアイテム`'アイテム'ウィンドウ内のアイテムをゲーム内のアイテムの色に対応する色で表示します。
 - `自動でDiscordにバックアップ` **Discord webhook**を使用して、プレイ中に新しいセーブコードのバックアップを自動的にDiscordチャンネルにアップロードします。
 - `OSCパラメータを送信` OSCを使用してアバターパラメータを送信します。詳しくは[ドキュメント](#osc-documentation)を確認してください。
-- `WebSocket API サーバー` 接続されたクライアントにリアルタイムのゲーム内イベントを送信するWebSocketサーバーを有効にします。詳しくは[**APIドキュメント**](Docs/WebSocketAPI.md)をご確認ください。
-- `チャットボックスメッセージを送信`ToNの情報をVRChatのチャットボックスに送信します。 (待機時間のみ) - テンプレートをさらにカスタマイズするには[**テンプレートドキュメント**](Docs/Templates.md)をご確認ください。
+- `WebSocket API サーバー` 接続されたクライアントにリアルタイムのゲーム内イベントを送信するWebSocketサーバーを有効にします。詳しくは[**APIドキュメント**](../Docs/Localization/ja-JP/WebSocketAPI.md)をご確認ください。
+- `チャットボックスメッセージを送信`ToNの情報をVRChatのチャットボックスに送信します。 (待機時間のみ) - テンプレートをさらにカスタマイズするには[**テンプレートドキュメント**](../Docs/Localization/ja-JP/Templates.md)をご確認ください。
 <details><summary>プレビュー画像</summary><p> <img src="../Resources/settings.png" > </p></details>
 
 ## 右クリックメニュー
@@ -56,8 +56,8 @@
 - このウィンドウにはアンロック可能なリストが表示され、進捗状況を確認することができます。アンロックしたものをクリックするだけです。
 
 ## OSC ドキュメント
-- [**パラメータ名と型**](Docs/OSC/OSC_Parameters.md)
-- [**ラウンドタイプ値**](Docs/OSC/OSC_RoundType.md)
+- [**パラメータ名と型**](../Docs/Localization/ja-JP/OSC/OSC_Parameters.md)
+- [**ラウンドタイプ値**](../Docs/Localization/ja-JP/OSC/OSC_RoundType.md)
 
 <details><summary>OSCトラブルシューティング</summary><p>
 パラメータが正しく受信されない場合は、OSCをリセットしてみてください。
@@ -68,7 +68,7 @@
 </p></details>
 
 # 🌐 利用可能な翻訳
-> [`Localization/CONTRIBUTE.md`](Localization/CONTRIBUTE.md)をチェックして、Save Managerをあなたの言語に翻訳してください。
+> [`Localization/CONTRIBUTE.md`](../Localization/CONTRIBUTE.md)をチェックして、Save Managerをあなたの言語に翻訳してください。
 
 | 言語 | 翻訳者 |
 | -------- | ---------- |
@@ -88,7 +88,7 @@
 
 > - **Discord:** [@Kittenji](https://discord.gg/Anpm8d3fPD)<br>
 > - **VRChat:** [Kittenji](https://vrchat.com/home/user/usr_7ac745b8-e50e-4c9c-95e5-8e7e3bcde682)
-> ## [Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)をプレイしているのを見かけたら声をかけてね！
+> ## 私が[Terrors of Nowhere](https://vrchat.com/home/world/wrld_a61cdabe-1218-4287-9ffc-2a4d1414e5bd)をプレイしているのを見かけたら声をかけてね！
 > <p> <img src="../Resources/loop.gif" alt="Preview" title="AAAAAA!"> </p>
 
 # ❤️ サポート:
