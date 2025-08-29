@@ -45,15 +45,8 @@ namespace ToNSaveManager.Windows
         {
             if (e.IsSuccess)
             {
-                // どこぞやのURLに遷移
                 this.trackerWebView.CoreWebView2.Navigate("https://tontrack.me/");
-
-                // 遷移完了のイベント追加
                 this.trackerWebView.CoreWebView2.NavigationCompleted += this.webView2_NavigationCompleted;
-            }
-            else
-            {
-                // エラー処理
             }
         }
 
@@ -61,12 +54,7 @@ namespace ToNSaveManager.Windows
         {
             if (e.IsSuccess)
             {
-                // 実行したいJavaScriptを書く
                 this.trackerWebView.ExecuteScriptAsync("WSToggle()");
-            }
-            else
-            {
-                // エラー処理
             }
         }
     }
