@@ -26,7 +26,8 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             listBoxKeys = new ListBox();
@@ -49,6 +50,7 @@
             splitContainer1 = new SplitContainer();
             btnStats = new Button();
             linkSupport = new Button();
+            btnTrack = new Button();
             ctxMenuEntries.SuspendLayout();
             ctxMenuKeys.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -117,7 +119,7 @@
             // ctxMenuEntriesNew
             // 
             ctxMenuEntriesNew.Name = "ctxMenuEntriesNew";
-            ctxMenuEntriesNew.Size = new Size(155, 22);
+            ctxMenuEntriesNew.Size = new Size(154, 22);
             ctxMenuEntriesNew.Text = "New Collection";
             ctxMenuEntriesNew.ToolTipText = "Add this entry to a new collection.";
             ctxMenuEntriesNew.Click += ctxMenuEntriesNew_Click;
@@ -154,31 +156,31 @@
             // 
             ctxMenuKeys.Items.AddRange(new ToolStripItem[] { importToolStripMenuItem, renameToolStripMenuItem, toolStripMenuItem1, deleteToolStripMenuItem });
             ctxMenuKeys.Name = "ctxMenuKeys";
-            ctxMenuKeys.Size = new Size(118, 76);
+            ctxMenuKeys.Size = new Size(117, 76);
             // 
             // importToolStripMenuItem
             // 
             importToolStripMenuItem.Name = "importToolStripMenuItem";
-            importToolStripMenuItem.Size = new Size(117, 22);
+            importToolStripMenuItem.Size = new Size(116, 22);
             importToolStripMenuItem.Text = "Import";
             importToolStripMenuItem.Click += ctxMenuKeysImport_Click;
             // 
             // renameToolStripMenuItem
             // 
             renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            renameToolStripMenuItem.Size = new Size(117, 22);
+            renameToolStripMenuItem.Size = new Size(116, 22);
             renameToolStripMenuItem.Text = "Rename";
             renameToolStripMenuItem.Click += ctxMenuKeysRename_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(114, 6);
+            toolStripMenuItem1.Size = new Size(113, 6);
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(117, 22);
+            deleteToolStripMenuItem.Size = new Size(116, 22);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += ctxMenuKeysDelete_Click;
             // 
@@ -207,7 +209,7 @@
             btnObjectives.ForeColor = Color.White;
             btnObjectives.Location = new Point(0, 223);
             btnObjectives.Name = "btnObjectives";
-            btnObjectives.Size = new Size(165, 24);
+            btnObjectives.Size = new Size(131, 24);
             btnObjectives.TabIndex = 0;
             btnObjectives.TabStop = false;
             btnObjectives.Text = "Objectives";
@@ -243,6 +245,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(btnTrack);
             splitContainer1.Panel2.Controls.Add(btnStats);
             splitContainer1.Panel2.Controls.Add(linkSupport);
             splitContainer1.Panel2.Controls.Add(listBoxEntries);
@@ -261,7 +264,7 @@
             btnStats.FlatAppearance.BorderColor = Color.FromArgb(122, 122, 122);
             btnStats.FlatStyle = FlatStyle.Flat;
             btnStats.ForeColor = Color.White;
-            btnStats.Location = new Point(171, 223);
+            btnStats.Location = new Point(137, 223);
             btnStats.Name = "btnStats";
             btnStats.Size = new Size(58, 24);
             btnStats.TabIndex = 5;
@@ -285,6 +288,22 @@
             linkSupport.TabStop = false;
             linkSupport.UseVisualStyleBackColor = false;
             linkSupport.Click += linkSupport_Click;
+            // 
+            // btnTrack
+            // 
+            btnTrack.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnTrack.BackColor = Color.FromArgb(46, 52, 64);
+            btnTrack.FlatAppearance.BorderColor = Color.FromArgb(122, 122, 122);
+            btnTrack.FlatStyle = FlatStyle.Flat;
+            btnTrack.ForeColor = Color.White;
+            btnTrack.Location = new Point(201, 223);
+            btnTrack.Name = "btnTrack";
+            btnTrack.Size = new Size(28, 24);
+            btnTrack.TabIndex = 6;
+            btnTrack.TabStop = false;
+            btnTrack.Text = "T";
+            btnTrack.UseVisualStyleBackColor = false;
+            btnTrack.Click += btnTrack_Click;
             // 
             // MainWindow
             // 
@@ -333,5 +352,6 @@
         private ToolStripMenuItem ctxMenuEntriesBackup;
         private Button linkSupport;
         private Button btnStats;
+        private Button btnTrack;
     }
 }
